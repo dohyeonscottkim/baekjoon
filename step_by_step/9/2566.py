@@ -13,4 +13,3 @@ maxRowIndex = maxRow.index(maxNumber)
 maxColumnIndex = m[maxRowIndex].index(maxNumber)
 
 print(f"{maxRowIndex+1} {maxColumnIndex+1}")
-
