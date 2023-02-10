@@ -118,38 +118,75 @@ for i in range(n):
 #     print(array[i])
 
 #heap sort(힙 정렬)
-def heapify(arr, idx, size):
-    left = idx*2
-    right = idx*2 + 1
-    largest = idx
+# def heapify(arr, idx, size):
+#     left = idx*2
+#     right = idx*2 + 1
+#     largest = idx
     
-    if left < size and arr[left] > arr[largest]:
-        largest = left
+#     if left < size and arr[left] > arr[largest]:
+#         largest = left
     
-    if right < size and arr[right] > arr[largest]:
-        largest = right
+#     if right < size and arr[right] > arr[largest]:
+#         largest = right
     
-    if largest != idx:
-        arr[idx], arr[largest] = arr[largest], arr[idx]
-        heapify(arr, largest, size)
+#     if largest != idx:
+#         arr[idx], arr[largest] = arr[largest], arr[idx]
+#         heapify(arr, largest, size)
         
-def heapsort(arr):
-    size = len(arr)
+# def heapsort(arr):
+#     size = len(arr)
     
-    for i in range(size//2-1, -1, -1):
-        heapify(arr, i, size)
+#     for i in range(size//2-1, -1, -1):
+#         heapify(arr, i, size)
     
-    for i in range(n-1, 0, -1):
-        arr[0], arr[i] = arr[i], arr[0]
-        heapify(arr, 0, i)
+#     for i in range(n-1, 0, -1):
+#         arr[0], arr[i] = arr[i], arr[0]
+#         heapify(arr, 0, i)
     
-    return arr
+#     return arr
 
-sortedArray = heapsort(array)
+# sortedArray = heapsort(array)
 
-for i in range(n):
-    print(sortedArray[i])
+# for i in range(n):
+#     print(sortedArray[i])
 
 #radix sort(기수 정렬)
+def countingSort(arr, digit):
+    n = len(arr)
+    
+    output = [0 for i in range(n)]
+    count = [0 for i in range(10)]
+    
+    for i in range(n):
+        index = arr[i] // digit
+        count[index % 10] += 1
+    
+    for i in range(1, 10):
+        count[i] += count[i-1]
+    
+    i = n-1
 
+    while i >= 0:
+        index = arr[i] // digit
+        output[count[index % 10]-1] = arr[i]
+        count[index%10] -= 1
+        i -= 1
+    
+    for i in range(n):
+        arr[i] = output[i]
+
+def radixSort(arr):
+    max_element = max(arr)
+    
+    digit = 1
+    
+    while max_element // digit > 0:
+        countingSort(arr, digit)
+        digit *= 10
+    
+radixSort(array)
+
+for i in range(n):
+    print(array[i])
+    
 #count sort(계수 정렬)
