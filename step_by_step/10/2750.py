@@ -150,6 +150,37 @@ for i in range(n):
 # for i in range(n):
 #     print(sortedArray[i])
 
+
+    
+#count sort(계수 정렬)
+def countingSort(arr):
+    n = len(arr)
+    max_element = max(arr)
+    
+    output = [0 for i in range(n)]
+    count = [0 for i in range(max_element+1)]
+    
+    for i in range(n):
+        count[arr[i]] += 1
+        
+    for i in range(1, max_element+1):
+        count[i] += count[i-1]
+        
+    i = n-1
+
+    while i >= 0:
+        output[count[arr[i]] - 1] = arr[i]
+        count[arr[i]] -= 1
+        i -= 1
+        
+    for i in range(n):
+        arr[i] = output[i]
+    
+countingSort(array)
+
+for i in range(n):
+    print(array[i])
+
 #radix sort(기수 정렬)
 # def countingSort(arr, digit):
 #     n = len(arr)
@@ -188,33 +219,3 @@ for i in range(n):
 
 # for i in range(n):
 #     print(array[i])
-    
-#count sort(계수 정렬)
-def countingSort(arr):
-    n = len(arr)
-    max_element = max(arr)
-    
-    output = [0 for i in range(n)]
-    count = [0 for i in range(max_element+1)]
-    
-    for i in range(n):
-        count[arr[i]] += 1
-        
-    for i in range(1, max_element+1):
-        count[i] += count[i-1]
-        
-    i = n-1
-
-    while i >= 0:
-        output[count[arr[i]] - 1] = arr[i]
-        count[arr[i]] -= 1
-        i -= 1
-        
-    for i in range(n):
-        arr[i] = output[i]
-    
-countingSort(array)
-
-for i in range(n):
-    print(array[i])
-    
