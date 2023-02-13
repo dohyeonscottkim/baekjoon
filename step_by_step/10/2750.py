@@ -146,47 +146,75 @@ for i in range(n):
 #     return arr
 
 # sortedArray = heapsort(array)
-
+# 
 # for i in range(n):
 #     print(sortedArray[i])
 
 #radix sort(기수 정렬)
-def countingSort(arr, digit):
+# def countingSort(arr, digit):
+#     n = len(arr)
+    
+#     output = [0 for i in range(n)]
+#     count = [0 for i in range(10)]
+    
+#     for i in range(n):
+#         index = arr[i] // digit
+#         count[index % 10] += 1
+    
+#     for i in range(1, 10):
+#         count[i] += count[i-1]
+    
+#     i = n-1
+
+#     while i >= 0:
+#         index = arr[i] // digit
+#         output[count[index % 10]-1] = arr[i]
+#         count[index%10] -= 1
+#         i -= 1
+    
+#     for i in range(n):
+#         arr[i] = output[i]
+
+# def radixSort(arr):
+#     max_element = max(arr)
+    
+#     digit = 1
+    
+#     while max_element // digit > 0:
+#         countingSort(arr, digit)
+#         digit *= 10
+    
+# radixSort(array)
+
+# for i in range(n):
+#     print(array[i])
+    
+#count sort(계수 정렬)
+def countingSort(arr):
     n = len(arr)
+    max_element = max(arr)
     
     output = [0 for i in range(n)]
-    count = [0 for i in range(10)]
+    count = [0 for i in range(max_element+1)]
     
     for i in range(n):
-        index = arr[i] // digit
-        count[index % 10] += 1
-    
-    for i in range(1, 10):
+        count[arr[i]] += 1
+        
+    for i in range(1, max_element+1):
         count[i] += count[i-1]
-    
+        
     i = n-1
 
     while i >= 0:
-        index = arr[i] // digit
-        output[count[index % 10]-1] = arr[i]
-        count[index%10] -= 1
+        output[count[arr[i]] - 1] = arr[i]
+        count[arr[i]] -= 1
         i -= 1
-    
+        
     for i in range(n):
         arr[i] = output[i]
-
-def radixSort(arr):
-    max_element = max(arr)
     
-    digit = 1
-    
-    while max_element // digit > 0:
-        countingSort(arr, digit)
-        digit *= 10
-    
-radixSort(array)
+countingSort(array)
 
 for i in range(n):
     print(array[i])
     
-#count sort(계수 정렬)
